@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body, #root { height: 100%; }
+body { @apply bg-ink-950 text-slate-200 font-sans antialiased; }
+
+@layer components {
+  .panel { @apply bg-ink-900/90 border border-ink-700 rounded-xl; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-rose-600 hover:bg-rose-500 text-white; }
+  .btn-secondary { @apply btn bg-ink-700 hover:bg-ink-600 text-slate-100 border border-ink-600; }
+  .btn-ghost { @apply btn hover:bg-ink-700 text-slate-300; }
+  .btn-success { @apply btn bg-emerald-600 hover:bg-emerald-500 text-white; }
+  .input { @apply w-full rounded-lg bg-ink-850 border border-ink-600 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/60; }
+  .label { @apply block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold; }
+  .kpi { @apply font-mono text-2xl font-bold text-white tabular-nums; }
+}
+
+/* Leaflet dark theme tweaks */
+.leaflet-container { background: #0b1120; font-family: Inter, sans-serif; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #141d31; color: #e2e8f0; border: 1px solid #2a3650; }
+.leaflet-popup-content { margin: 10px 12px; font-size: 12px; }
+.leaflet-control-attribution { background: rgba(11,17,32,.7) !important; color: #64748b !important; }
+.leaflet-control-attribution a { color: #94a3b8 !important; }
+.leaflet-bar a { background: #141d31 !important; color: #e2e8f0 !important; border-color: #2a3650 !important; }
+
+.inc-marker { position: relative; }
+.inc-marker .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(0,0,0,.4); position: absolute; left: 0; top: 0; }
+.inc-marker .ring { width: 16px; height: 16px; border-radius: 50%; position: absolute; left: 0; top: 0; }
+.inc-marker.selected .dot { outline: 3px solid #38bdf8; outline-offset: 2px; }
+.res-marker { font-size: 15px; line-height: 22px; text-align: center; width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid; background: #0b1120; }
+.sensor-marker { width: 10px; height: 10px; transform: rotate(45deg); border: 1.5px solid #fff; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #2a3650; border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }

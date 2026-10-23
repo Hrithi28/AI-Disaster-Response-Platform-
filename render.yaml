@@ -1,0 +1,36 @@
+# Render Blueprint — one-click cloud deployment (state-HQ / public demo).
+# Render dashboard → New → Blueprint → select this repo.
+# Free external databases: PostgreSQL on Neon (neon.tech), MongoDB on Atlas (M0).
+services:
+  - type: web
+    name: drp-ml
+    runtime: docker
+    dockerfilePath: ./ml-service/Dockerfile
+    dockerContext: ./ml-service
+    plan: free
+    healthCheckPath: /health
+
+  - type: web
+    name: drp-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SYNC_KEY
+        generateValue: true
+      - key: ML_URL
+        fromService: { type: web, name: drp-ml, envVarKey: RENDER_EXTERNAL_URL }
+      - key: DATABASE_URL
+        sync: false # paste the Neon connection string
+      - key: MONGO_URL
+        sync: false # paste the Atlas connection string
+      - key: NODE_ROLE
+        value: edge
+      - key: SIM_ENABLED
+        value: "true"

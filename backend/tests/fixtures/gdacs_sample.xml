@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:gdacs="http://www.gdacs.org" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" version="2.0"><channel>
+<item><title>Orange alert for tropical cyclone MONTHA-25. Population affected by Category 1 (120 km/h) wind speeds or higher is 1.2 million.</title>
+<description>From 27/10/2025 to 29/10/2025, a Tropical Cyclone MONTHA-25 was active in NorthIndian.</description>
+<link>https://www.gdacs.org/report.aspx?eventtype=TC&amp;eventid=1001234</link><pubDate>Mon, 27 Oct 2025 06:00:00 GMT</pubDate>
+<gdacs:eventtype>TC</gdacs:eventtype><gdacs:eventid>1001234</gdacs:eventid><gdacs:alertlevel>Orange</gdacs:alertlevel><gdacs:country>India</gdacs:country>
+<gdacs:severity unit="km/h" value="120">Tropical Storm (maximum wind speed of 120 km/h)</gdacs:severity>
+<geo:Point><geo:lat>14.2</geo:lat><geo:long>82.1</geo:long></geo:Point></item>
+<item><title>Green earthquake alert in Chile</title><description>M 4.9</description><link>https://www.gdacs.org/x</link><pubDate>Mon, 27 Oct 2025 05:00:00 GMT</pubDate>
+<gdacs:eventtype>EQ</gdacs:eventtype><gdacs:eventid>99</gdacs:eventid><gdacs:alertlevel>Green</gdacs:alertlevel><gdacs:country>Chile</gdacs:country>
+<geo:Point><geo:lat>-33.4</geo:lat><geo:long>-70.6</geo:long></geo:Point></item>
+</channel></rss>

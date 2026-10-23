@@ -1,0 +1,19 @@
+{
+  "name": "DRP – Disaster Response Platform",
+  "short_name": "DRP Field",
+  "description": "AI-powered disaster response: field team app, citizen SOS and command dashboard. Works offline and syncs when signal returns.",
+  "start_url": "/field",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#0b1120",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Field app", "url": "/field" },
+    { "name": "Send SOS", "url": "/sos" }
+  ]
+}

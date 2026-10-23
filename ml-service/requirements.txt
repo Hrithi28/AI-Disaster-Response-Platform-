@@ -1,0 +1,11 @@
+fastapi>=0.110
+uvicorn[standard]>=0.27
+scikit-learn>=1.3
+numpy>=1.26
+pandas>=2.0
+joblib>=1.3
+pydantic>=2.5
+httpx>=0.27
+pytest>=8.0
+# Optional: better location entity extraction
+# spacy>=3.7  (then: python -m spacy download en_core_web_sm)

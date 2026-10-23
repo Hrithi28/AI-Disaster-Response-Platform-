@@ -1,0 +1,60 @@
+# Production-like stack on ONE machine (e.g. the control-room laptop/server).
+# Everything here runs without internet once the images are built.
+#   docker compose up --build           → edge node   http://localhost:4000
+#   docker compose --profile cloud up   → also a state-HQ cloud node on :4200 receiving sync
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: drp, POSTGRES_PASSWORD: drp, POSTGRES_DB: drp }
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U drp"], interval: 5s, retries: 10 }
+
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: [mongodata:/data/db]
+
+  ml:
+    build: ./ml-service
+    ports: ["8000:8000"]
+    volumes: [mlmodels:/app/models]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      retries: 12
+
+  api:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    ports: ["4000:4000"]
+    environment:
+      DATABASE_URL: postgres://drp:drp@postgres:5432/drp
+      MONGO_URL: mongodb://mongo:27017/drp
+      ML_URL: http://ml:8000
+      JWT_SECRET: change-me-in-production
+      NODE_ID: chennai-eoc
+      CLOUD_SYNC_URL: ${CLOUD_SYNC_URL:-http://cloud:4200}
+      SYNC_KEY: ${SYNC_KEY:-change-me-sync-key}
+      SMS_PROVIDER: ${SMS_PROVIDER:-simulated}
+      SMS_GATEWAY_URL: ${SMS_GATEWAY_URL:-}
+    depends_on:
+      postgres: { condition: service_healthy }
+      mongo: { condition: service_started }
+      ml: { condition: service_healthy }
+
+  cloud:
+    profiles: ["cloud"]
+    build: { context: ., dockerfile: backend/Dockerfile }
+    ports: ["4200:4200"]
+    environment:
+      PORT: 4200
+      NODE_ROLE: cloud
+      NODE_ID: tn-state-hq
+      SIM_ENABLED: "false"
+      SYNC_KEY: ${SYNC_KEY:-change-me-sync-key}
+      ML_URL: http://ml:8000
+
+volumes:
+  pgdata:
+  mongodata:
+  mlmodels:

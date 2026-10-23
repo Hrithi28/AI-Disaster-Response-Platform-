@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+ml-service/models/*.joblib
+ml-service/models/feedback.jsonl
+.venv/
+backend/.vapid.json
+frontend/test-results/
+frontend/playwright-report/
+ml-service/data/humaid/*.tsv
+ml-service/models/comparison.json
+backend/data/local-db*/
+backend/data/local-docs*.json*
